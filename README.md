@@ -1,4 +1,4 @@
-# 🚀 AI Assistant App for Rocket.Chat 🎨
+# 🚀 AI Assistant App for Rocket.Chat 🤖
 
 ## Description
 
