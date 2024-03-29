@@ -13,6 +13,7 @@
     "classFile": "AIAssistantApp.ts",
     "description": "AI Assistant to help with understanding Rocket.Chat core codebase",
     "implements": [
-        "IPostRoomUserJoined"
+        "IPostRoomUserJoined",
+        "IPostMessageSent"
     ]
 }

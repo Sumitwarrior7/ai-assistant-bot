@@ -10,7 +10,10 @@ import {
 import { AIAssistantApp } from "../AIAssistantApp";
 import { ExecutorProps } from "../definitions/ExecutorProps";
 
-import { sendNotification } from "../lib/messages";
+import {
+    sendNotificationToRoom,
+    sendNotificationToUser,
+} from "../lib/messages";
 import { helperMessage, sendDirectMessage, sendMessage } from "../lib/messages";
 import { AIAssistantEndpoint } from "../endpoints/endpoints";
 
@@ -76,7 +79,7 @@ export class CommandUtility implements ExecutorProps {
         );
         console.log("Resp  :", JSON.stringify(response, null, 2));
 
-        await sendNotification(
+        await sendNotificationToUser(
             this.read,
             this.modify,
             this.sender,
@@ -160,7 +163,7 @@ export class CommandUtility implements ExecutorProps {
             default:
                 console.log(`command chala diya  ${this.command}`);
                 await Promise.all([
-                    sendNotification(
+                    sendNotificationToUser(
                         this.read,
                         this.modify,
                         this.sender,

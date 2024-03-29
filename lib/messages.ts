@@ -115,8 +115,8 @@ export async function shouldSendMessage(
     return notificationsStatus ? notificationsStatus.status : true;
 }
 
-// sendNotification is used to send a notification to a user,notification is a message which is not visible to other users
-export async function sendNotification(
+// sendNotification is used to send a notification to a user, notification is a message which is not visible to other users
+export async function sendNotificationToUser(
     read: IRead,
     modify: IModify,
     user: IUser,
@@ -132,7 +132,27 @@ export async function sendNotification(
         .setRoom(room)
         .setText(message);
 
-    return read.getNotifier().notifyUser(user, msg.getMessage());
+    return await read.getNotifier().notifyUser(user, msg.getMessage());
+}
+
+// sendNotification is used to send a notification to all the users in the room
+export async function sendNotificationToRoom(
+    read: IRead,
+    modify: IModify,
+    user: IUser,
+    room: IRoom,
+    message: string
+): Promise<void> {
+    const appUser = (await read.getUserReader().getAppUser()) as IUser;
+
+    const msg = modify
+        .getCreator()
+        .startMessage()
+        .setSender(appUser)
+        .setRoom(room)
+        .setText(message);
+
+    return await read.getNotifier().notifyRoom(room, msg.getMessage());
 }
 
 // sendDirectMessage is used to send a direct message to a user
@@ -178,7 +198,7 @@ export async function helperMessage(
     
     Feel free to explore and enjoy the assistance!`;
 
-    return await sendNotification(read, modify, user, room, text);
+    return await sendNotificationToUser(read, modify, user, room, text);
 }
 
 // Function to delete a message
