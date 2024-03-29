@@ -1,98 +1,42 @@
-# Setting Up the Rocket.Chat App starter code
+# 🚀 AI Assistant App for Rocket.Chat 🎨
 
-This guide provides a brief overview of how to set up the starter code for the Rocket.Chat App. We will use this project during our App Development workshop.
+## Description
 
-## Prerequisites
+This Rocket.Chat app provides an AI Assistant bot to help you understand the Rocket.Chat codebase. Built on top of Rocket.Chat's app framework, the bot leverages open-source LLMs (Large Language Models) from Hugging Face Inference APIs to answer your queries about the code's structure, logic, and workflows directly into the room
 
-Before you begin, ensure you have the following:
+## How to Use the App
 
-- Rocket.Chat server set up and running. We will provide a server during the workshop.
-- Linux OS or WSL with Node.js installed.
-- The Rocket.Chat Apps CLI installed. You can install it using npm with the command `npm install -g @rocket.chat/apps-cli`.
-- The starter code is already set up. Follow the below steps to set up the starter code.
-
-## Steps to Set Up this Rocket.Chat App
-1. **Clone this repo**:
-    ```
-    git clone https://github.com/abhinavkrin/app-workshop-welcome-bot.git
-    ```
-2. **Install the dependencies**:
-    ```
-    npm install
-    ```
-3. **Edit `app.json`**:
-   Every Rocket.Chat app has a unique ID. To set this, you will need to replace the value in the `id` field of your `app.json` file with a unique UUID.
+1. **Installation**:
+   - Install the app on your Rocket.Chat server.
    
-   - Obtain a UUID from [UUID Generator](https://www.uuidgenerator.net/version4) and replace the `id` field in your `app.json` with this UUID.
+2. **Usage**:
+   - Navigate to the dedicated AI Assistant room.
+   - Ask any questions you have regarding the Rocket.Chat codebase.
+   - The bot will promptly respond with relevant information.
    
-   Example `app.json` snippet:
-   ```json
-   {
-     "id": "YOUR-UNIQUE-APP-ID",
-     "name": "Your App Name",
-     "description": "What your app does",
-     ...
-   }
+3. **Customization**:
+   - Modify app settings to change the language model (LLM) or view available LLMs.
+   - Use commands provided within the app to customize settings.
+
+## Local Setup Guide
+
+To set up the AI Assistant bot locally, follow these steps:
+
+1. **Prerequisites**:
+   - Ensure you have a working Rocket.Chat server and Apps-Engine CLI installed on your machine. If not, set up the server [here](https://rocket.chat/docs/installation/docker-containers/) and CLI [here](https://github.com/RocketChat/Rocket.Chat.Apps-cli).
+
+2. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/<github_handle>/ai-assistant-bot.git
+   ```
+3. **Install Dependencies:**:
+   ```bash
+   npm install
+   ```
+4. **Deploy your app locally:**:
+   ```bash
+   rc-apps deploy --url http://localhost:3000 --username ${username} --password ${password}
    ```
    
-   Replace `YOUR-UNIQUE-APP-ID` with the UUID you obtained. As a result each of you will have an app with unique app id.
+   Your username and password are your local server's user credentials .Verify the successful build by accessing the /excalidraw endpoint in the Whiteboard app settings. You can access the React app through the provided URL.
 
-   Change `nameSlug` under app.json file to match with the name of your app. 
-    ```json
-    {
-        ...
-        name: "YournameWelcomeBot",
-        nameSlug: "yournamewelcomebot" 
-        ...
-    }
-    ```
-    Replace `Yourname` and `yourname` with your actual name without any sepcial character in `name` and `nameSlug` field respectively.
- 
-4. **Edit `GetInfo.ts`**:
-    Since, each slash command is unique, we cannot havemore than one slash command with same command string. Edit `slashCommands/GetInfo.ts`
-    ```
-    export class GetInfo implements ISlashCommand {
-        public command = "getinfo-YOURNAME";
-        ...
-
-        async executor(...): Promise<void> {
-
-        }
-    }
-    ```
-    Replace `YOURNAME` with your name. As a result, each one of you will will have a unique slash command.
-
-5. **Check Setup and Confirm Seat**
-Run a check if everything has been set up correctly:
-```
-npm run check-setup
-```
-If everything is set up correctly you can see a message like this:
-![Screenshot from 2024-02-13 23-41-08](https://github.com/abhinavkrin/app-workshop-welcome-bot/assets/15830206/0065d085-8b9c-408a-b5ac-4df7e85c430f)
-
-Visit the link and fill the form to confirm your seat. 🥳 
-
-### Develop Your App: (During Workshop)
-   With the project starter code configured, follow us along in the workshop to develop the app.
-
-### Deploy Your App: (During Workshop)
-   After developing your app, you can deploy it to your Rocket.Chat server for testing and use. Use the Rocket.Chat Apps CLI to package and deploy your app:
-   ```
-   rc-apps deploy --url <url-of-rc-server> --username <username> --password <your-password>
-   ```
-   Username and password will be provided during workshop
-
-## FAQ
-### **1. Where can I find the final code?** <br>
-The final code could be found in the `final` branch
-
-### **2. When will the Username and Password for the test server be shared?**
-The credentials will be shared during workshop
-
-### **3. What if I encounter errors during setup?**
-Please share your issue in the [Events Channel](https://open.rocket.chat/channel/events-and-meet-ups).
-
-### **4. Is setting up the project mandatory?**
-Yes. For best experience during the workshop, It is highly recommended that you have set up the starter code.
-
-See you in the workshop! Don't forget to fill feedback form which will be provided at the end of the workshop.
